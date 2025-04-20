@@ -1,40 +1,41 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import './styles/background.css';
-import Navbar from './components/Navbar';
+import { ThemeProvider, CssBaseline, Box } from '@mui/material';
+import { Provider } from 'react-redux';
+import store from './store';
+import theme from './theme';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './components/Home';
-import GameList from './components/GameList';
+import Games from './components/Games';
 import GameDetail from './components/GameDetail';
 import Cart from './components/Cart';
-import Checkout from './components/Checkout';
-import Footer from './components/Footer';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 function App() {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  const theme = createTheme({
-    // ... existing theme configuration ...
-  });
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div className="app-background" />
-      <div className="app-content">
-        <Router>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/games" element={<GameList />} />
-            <Route path="/games/:id" element={<GameDetail />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/checkout" element={<Checkout />} />
-          </Routes>
-        </Router>
-      </div>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <CssBaseline />
+          <Router>
+            <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+              <Header />
+              <Box component="main" sx={{ flexGrow: 1, mt: '64px' }}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/games" element={<Games />} />
+                  <Route path="/games/:id" element={<GameDetail />} />
+                  <Route path="/cart" element={<Cart />} />
+                </Routes>
+              </Box>
+              <Footer />
+            </Box>
+          </Router>
+        </LocalizationProvider>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

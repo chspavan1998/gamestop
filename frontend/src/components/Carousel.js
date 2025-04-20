@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Paper } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const Carousel = ({ items }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,33 +13,41 @@ const Carousel = ({ items }) => {
   }, [items.length]);
 
   return (
-    <Box sx={{ position: 'relative', height: '400px', overflow: 'hidden' }}>
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{
+    <Box sx={{ 
+      position: 'relative', 
+      height: '400px', 
+      overflow: 'hidden',
+      background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)'
+    }}>
+      {items.map((item, index) => (
+        <Box
+          key={index}
+          sx={{
             position: 'absolute',
             top: 0,
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundImage: `url(${items[currentIndex].image})`,
+            backgroundImage: `url(${item.image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            opacity: index === currentIndex ? 1 : 0,
+            transition: 'opacity 1s ease-in-out',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.2))',
+            }
           }}
         >
           <Box
             sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
+              position: 'relative',
               height: '100%',
-              backgroundColor: 'rgba(0, 0, 0, 0.4)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -57,22 +64,24 @@ const Carousel = ({ items }) => {
                 fontWeight: 'bold',
                 mb: 2,
                 textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
+                color: '#ffffff',
               }}
             >
-              {items[currentIndex].title}
+              {item.title}
             </Typography>
             <Typography
               variant="h5"
               sx={{
                 maxWidth: '600px',
                 textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
+                color: '#f5f5f5',
               }}
             >
-              {items[currentIndex].description}
+              {item.description}
             </Typography>
           </Box>
-        </motion.div>
-      </AnimatePresence>
+        </Box>
+      ))}
       <Box
         sx={{
           position: 'absolute',
@@ -90,9 +99,13 @@ const Carousel = ({ items }) => {
               width: 10,
               height: 10,
               borderRadius: '50%',
-              backgroundColor: currentIndex === index ? 'primary.main' : 'white',
+              backgroundColor: currentIndex === index ? 'primary.main' : 'rgba(255, 255, 255, 0.7)',
               cursor: 'pointer',
-              transition: 'background-color 0.3s',
+              transition: 'background-color 0.3s, transform 0.3s',
+              '&:hover': {
+                transform: 'scale(1.2)',
+                backgroundColor: 'primary.main',
+              }
             }}
             onClick={() => setCurrentIndex(index)}
           />
