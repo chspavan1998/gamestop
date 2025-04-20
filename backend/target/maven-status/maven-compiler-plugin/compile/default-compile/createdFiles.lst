@@ -1,0 +1,6 @@
+com\gamestop\backend\model\Game.class
+com\gamestop\backend\controller\GameController.class
+com\gamestop\backend\service\GameService.class
+com\gamestop\backend\repository\GameRepository.class
+com\gamestop\backend\BackendApplication$1.class
+com\gamestop\backend\BackendApplication.class
