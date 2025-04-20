@@ -1,9 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, Link, IconButton, Grid } from '@mui/material';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import { Facebook, Instagram } from '@mui/icons-material';
 
 const Footer = () => {
   return (
@@ -47,45 +44,23 @@ const Footer = () => {
               Connect With Us
             </Typography>
             <Box>
-              <IconButton 
-                color="primary" 
-                aria-label="Facebook" 
-                component="a" 
-                href="https://facebook.com"
+              <IconButton
+                component={Link}
+                href="https://www.instagram.com/chspavan?igsh=ZHNmcmNlNGF0cWVu&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
+                color="primary"
               >
-                <FacebookIcon />
+                <Instagram />
               </IconButton>
-              <IconButton 
-                color="primary" 
-                aria-label="Twitter" 
-                component="a" 
-                href="https://twitter.com"
+              <IconButton
+                component={Link}
+                href="https://www.facebook.com/share/1DpVTbHZAG/?mibextid=wwXIfr"
                 target="_blank"
                 rel="noopener noreferrer"
+                color="primary"
               >
-                <TwitterIcon />
-              </IconButton>
-              <IconButton 
-                color="primary" 
-                aria-label="Instagram" 
-                component="a" 
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <InstagramIcon />
-              </IconButton>
-              <IconButton 
-                color="primary" 
-                aria-label="YouTube" 
-                component="a" 
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <YouTubeIcon />
+                <Facebook />
               </IconButton>
             </Box>
           </Grid>
