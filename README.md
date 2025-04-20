@@ -1,7 +1,37 @@
-# GameStop - Board Game Rental Application
+# GameStop - Board Game Rental Platform
 
 ## Project Overview
-GameStop is a React-based web application for renting board games. It features a modern UI with Material-UI components, Redux for state management, and a responsive design.
+GameStop is a modern web application for renting board games. It provides a user-friendly interface for browsing, selecting, and renting various board games, both traditional and modern.
+
+## Recent Updates
+### UI/UX Improvements
+- Added scroll-to-top behavior when navigating to game details
+- Added game duration display on game cards with clock icon
+- Updated price display to show Indian Rupee (₹) symbol
+- Centered welcome message on the homepage
+- Added "View All Games" button below featured games section
+
+### Component Updates
+1. **GameCard.js**
+   - Added scroll-to-top functionality on "View Details" click
+   - Added game duration display with clock icon
+   - Improved card layout and hover effects
+
+2. **Cart.js**
+   - Updated price display to show Indian Rupee (₹) symbol
+   - Added proper tax calculation (18%)
+   - Improved order summary layout
+
+3. **GameDetail.js**
+   - Updated price display to show Indian Rupee (₹) symbol
+   - Improved rental cost calculation
+   - Enhanced date picker formatting
+
+4. **Home.js**
+   - Centered welcome message
+   - Added gradient background to welcome section
+   - Added "View All Games" button
+   - Improved featured games section layout
 
 ## Project Structure
 

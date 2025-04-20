@@ -20,6 +20,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { format, differenceInDays } from 'date-fns';
+import { enGB } from 'date-fns/locale';
 
 const GameDetail = () => {
   const { id } = useParams();
@@ -40,8 +41,8 @@ const GameDetail = () => {
 
   const calculateRentalCost = (days) => {
     const basePrice = game.price;
-    // Price increases by 10% for each additional day
-    return basePrice + (basePrice * 0.1 * (days - 1));
+    // Price is simply base price multiplied by number of days
+    return basePrice * days;
   };
 
   const handleAddToCart = () => {
@@ -66,8 +67,8 @@ const GameDetail = () => {
       dispatch(addToCart({
         ...game,
         customerDetails,
-        rentalStartDate: format(rentalStartDate, 'yyyy-MM-dd'),
-        rentalEndDate: format(rentalEndDate, 'yyyy-MM-dd'),
+        rentalStartDate: format(rentalStartDate, 'dd/MM/yyyy'),
+        rentalEndDate: format(rentalEndDate, 'dd/MM/yyyy'),
         rentalDuration: days,
         rentalCost: calculateRentalCost(days)
       }));
@@ -160,6 +161,9 @@ const GameDetail = () => {
             <Typography variant="h4" gutterBottom>
               {game.name}
             </Typography>
+            <Typography variant="h5" color="primary" gutterBottom>
+              ₹{game.price}
+            </Typography>
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
               <Star color="primary" />
               <Typography variant="h6" color="primary" sx={{ ml: 1 }}>
@@ -179,7 +183,7 @@ const GameDetail = () => {
             <Typography variant="h6" gutterBottom>
               Rental Period
             </Typography>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={enGB}>
               <Grid container spacing={2} sx={{ mb: 3 }}>
                 <Grid item xs={12} sm={6}>
                   <FormControl fullWidth>
@@ -188,6 +192,7 @@ const GameDetail = () => {
                       value={rentalStartDate}
                       onChange={(newValue) => setRentalStartDate(newValue)}
                       minDate={new Date()}
+                      format="dd/MM/yyyy"
                       renderInput={(params) => <TextField {...params} fullWidth />}
                     />
                   </FormControl>
@@ -199,6 +204,7 @@ const GameDetail = () => {
                       value={rentalEndDate}
                       onChange={(newValue) => setRentalEndDate(newValue)}
                       minDate={rentalStartDate}
+                      format="dd/MM/yyyy"
                       renderInput={(params) => <TextField {...params} fullWidth />}
                     />
                   </FormControl>

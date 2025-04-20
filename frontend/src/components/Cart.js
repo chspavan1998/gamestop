@@ -157,15 +157,16 @@ Cost: ₹${item.rentalCost}
               Order Summary
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
-              <Typography>Subtotal</Typography>
-              <Typography>₹{calculateTotal()}</Typography>
+              <Typography variant="body1">Subtotal</Typography>
+              <Typography variant="body1">₹{calculateTotal()}</Typography>
             </Box>
-            <Divider sx={{ my: 2 }} />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+              <Typography variant="body1">Tax (18%)</Typography>
+              <Typography variant="body1">₹{(calculateTotal() * 0.18).toFixed(2)}</Typography>
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
               <Typography variant="h6">Total</Typography>
-              <Typography variant="h6" color="primary">
-                ₹{calculateTotal()}
-              </Typography>
+              <Typography variant="h6">₹{(calculateTotal() * 1.18).toFixed(2)}</Typography>
             </Box>
             <Button
               variant="contained"
